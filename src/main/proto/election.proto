@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package org.example;
+option java_package = "org.example";
+option java_outer_classname = "ElectionProto";
+
+service ElectionService {
+  rpc transferElectionData  (ElectionDataRequest) returns (ElectionDataResponse);
+}
+
+message ElectionDataRequest {
+  ElectionData data = 1; // Contains the election data
+}
+
+message ElectionDataResponse {
+  string message = 1; // Response message from the server
+}
+
+// Main election data structure
+message ElectionData {
+  string regionID = 1;
+  string regionName = 2;
+  string regionAddress = 3;
+  string regionPostalCode = 4;
+  string federalState = 5;
+  string timestamp = 6;
+  repeated Party countingData = 7; // List of parties with vote counts
+}
+
+// Structure for each party's voting data
+message Party {
+  string partyID = 1;
+  int32 amountVotes = 2;
+}
